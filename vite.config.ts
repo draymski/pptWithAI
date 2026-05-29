@@ -11,7 +11,7 @@ export default defineConfig({
   server: {
     allowedHosts: [
       'ppt.renlan.top',
-      '30e515ea.r6.cpolar.cn'
+      '143a54e7.r6.cpolar.cn'
     ]
   }
 })

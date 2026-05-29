@@ -71,3 +71,15 @@ export default defineConfig([
   },
 ])
 ```
+
+# 环境配置, 运行, 部署
+
+- 环境是`mise + pnpm`
+- 打包项目: `pnpm run build`
+- 本地运行项目: `pnpm run dev`
+- 部署项目
+  - 临时公开本地端口
+    - 可用`CF tunnel`
+    - 可用`cpolar`, 安装并登录好后, 直接`cpolar http 5173`
+  - 长期托管在vercel
+

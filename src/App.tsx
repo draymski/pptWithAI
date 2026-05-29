@@ -1,19 +1,25 @@
 import React from 'react';
 import {
-  ShieldAlert, Cpu, Eye, BarChart,
-  Database, Network, ArrowRight, Map, QrCode, Navigation
+  ShieldAlert, Bot, Eye, BarChart,
+  Database, Navigation
 } from 'lucide-react';
-
-// === 全新色彩规范 (B2B/B2G 极简标准) ===
-const COLORS = {
-  title: '#1E293B',    // 稳重深灰蓝
-  body: '#475569',     // 优雅灰色
-  brand: '#005C3E',    // 权威生态绿
-  accent: '#00A35C',   // 智能科技绿
-  bgMain: '#FFFFFF',   // 纯白画布
-  bgCard: '#F8F9FA',   // 极轻柔浅灰
-  line: '#E9ECEF'      // 网格/分割线
-};
+import watermarkImg from './assets/mangrove/mangrove.jpeg';
+import coverImg from './assets/mangrove/cover.png';
+import page4TargetImg from './assets/mangrove/page4-展示小目标检测效果.png';
+import classImg1 from './assets/mangrove/展示分类能力-1.png';
+import classImg2 from './assets/mangrove/展示分类能力-2.jpg';
+import classImg3 from './assets/mangrove/展示分类能力-3.jpg';
+import classChart1 from './assets/mangrove/表-树种统计柱状图.jpg';
+import classChart2 from './assets/mangrove/表-树种的冠幅统计柱状图.png';
+import toleranceImg1 from './assets/mangrove/展示杂草容错-1.jpg';
+import toleranceImg2 from './assets/mangrove/有难度的滩涂背景的提取能力-1.jpg';
+import toleranceImg3 from './assets/mangrove/展示杂草容错-3-大尺度.png';
+import blockAnalysisImg from './assets/mangrove/大区块的统计分析能力-1.jpg';
+import wechatQRImg from './assets/wechatQRcod_2.jpg';
+import page2Img_1 from './assets/mangrove/传统人工-1.jpg';
+import page2Img_2 from './assets/mangrove/传统人工-2.png';
+import endPage from './assets/mangrove/尾页.jpg';
+import generatedBrandLogo from './assets/刃蓝商标/图标-圆-暗-六边形.jpg';
 
 interface PageProps {
   children: React.ReactNode;
@@ -40,14 +46,14 @@ const PageContent = ({ children, className = '' }: PageContentProps) => (
     {/* 背景图层：红树林航拍背景，大幅调高透明度，仅保留黑白去色以确保可见 */}
     <div className="absolute inset-0 pointer-events-none z-0">
       <img
-        src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=2000&auto=format&fit=crop"
+        src={watermarkImg}
         alt="Mangrove Watermark Background"
-        className="w-full h-full object-cover opacity-15 grayscale"
+        className="w-full h-full object-cover opacity-[0.25] brightness-30"
       />
     </div>
 
     {/* 内容图层：加上 relative z-10 确保文字和卡片浮在背景之上 */}
-    <div className={`relative z-10 w-full h-full px-16 py-14 flex flex-col ${className}`}>
+    <div className={`relative z-10 w-full flex-1 px-16 pt-14 pb-14 flex flex-col ${className}`}>
       {children}
     </div>
   </>
@@ -67,18 +73,18 @@ const Header = ({ title, subtitle }: HeaderProps) => (
 
 // === P1: 封面 ===
 const Page1 = () => (
-  <Page className="flex flex-row">
-    {/* Left 35% */}
-    <div className="w-[45%] bg-[#F8F9FA] px-14 py-20 flex flex-col justify-between z-10 border-r border-[#E9ECEF] text-center">
+  <Page className="relative">
+    {/* Left 45% overlapping on top */}
+    <div className="w-[45%] absolute left-0 top-0 bottom-0 bg-transparent px-14 py-20 flex flex-col justify-between z-20 text-center">
       <div className="mt-8">
         <h1 className="text-6xl font-serif font-bold text-[#1E293B] leading-tight mb-4 tracking-widest">
           红树林视觉<br />分析系统
         </h1>
-        <div className="text-[#005C3E] text-[18px] font-bold font-sans tracking-wide mb-8">
+        <div className="text-[#005C3E] text-[21px] font-bold font-sans tracking-wide mb-8">
           Mangrove Visual Analysis System (MVAS)
         </div>
         <div className="w-10 h-1 bg-[#00A35C] mb-8 mx-auto"></div>
-        <div className="text-[#475569] space-y-3 font-sans text-sm leading-relaxed">
+        <div className="text-[#475569] space-y-3 font-sans text-m leading-relaxed">
           <p className="font-medium">单株级精准检测 · 智能化树种识别</p>
           <p className="font-medium">守护“海岸卫士”的 AI 力量</p>
           <p className="text-xs text-[#475569]/60 mt-4 tracking-wider uppercase">Precision Individual Tree Detection & Species Identification</p>
@@ -86,10 +92,10 @@ const Page1 = () => (
       </div>
       <div className="mb-4">
         <div className="flex items-start gap-4">
-          <div className="w-16 h-16 bg-white border border-[#E9ECEF] rounded flex items-center justify-center p-1 shrink-0 shadow-sm">
-            <QrCode size={48} color={COLORS.title} />
+          <div className="w-20 h-20 bg-white border border-[#E9ECEF] rounded flex items-center justify-center p-1 shrink-0 shadow-sm">
+            <img src={wechatQRImg} alt="WeChat QR Code" className="w-full h-full object-cover rounded-sm" />
           </div>
-          <div className="pt-1">
+          <div className="pt-1 text-left">
             <p className="text-sm font-bold text-[#1E293B] mb-1">广州刃蓝科技有限公司</p>
             <p className="text-xs text-[#475569] mb-1 uppercase text-[10px] tracking-wider">Guangzhou Renlan Technology Co., Ltd.</p>
             <p className="text-xs text-[#475569]/80">官方邮箱: support@renlan.top</p>
@@ -98,24 +104,16 @@ const Page1 = () => (
       </div>
     </div>
 
-    {/* Right 65% */}
-    <div className="w-[65%] relative bg-white overflow-hidden">
+    {/* Right 65% in the background */}
+    <div className="w-[66%] absolute right-0 top-0 bottom-0 bg-white overflow-hidden z-10">
       <img
-        src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=2000&auto=format&fit=crop"
+        src={coverImg}
         alt="Mangrove Forest"
-        className="w-full h-full object-cover opacity-90"
+        className="w-full h-full object-cover opacity-100 contrast-[1.5] saturate-[1.05]"
       />
-      {/* Clean gradient transition to white on the left side */}
-      <div className="absolute inset-0 bg-gradient-to-r from-white via-white/50 to-transparent w-1/2"></div>
+      {/* Smooth gradient fade to transparent to ensure high text contrast */}
+      <div className="absolute inset-0 bg-gradient-to-r from-white via-white/50 to-transparent w-3/5"></div>
       <div className="absolute inset-0 bg-white/10"></div>
-
-      {/* Decorative vertical text */}
-      <div
-        className="absolute top-16 right-16 text-[#005C3E] opacity-[0.10] text-7xl font-serif font-bold tracking-[1.5em] select-none"
-        style={{ writingMode: 'vertical-rl' }}
-      >
-        万亩滩涂·见梢知林
-      </div>
     </div>
   </Page>
 );
@@ -125,28 +123,37 @@ const Page2 = () => (
   <Page>
     <PageContent>
       <Header
-        title="传统红树林调查面临的“物理极限”"
+        title="传统红树林调查的“物理局限”"
         subtitle="Traditional Challenges in Mangrove Monitoring"
       />
-      <p className="text-[#475569] mb-10 max-w-4xl leading-relaxed text-[15px]">
+      <p className="text-[#475569] mb-8 max-w-5xl leading-relaxed text-[15px]">
         在《湿地保护法》与国家“双碳”刚性考核下，高频次、高精度的生态监测已成刚需。然而，传统的调查手段正面临无法逾越的物理限制。
       </p>
 
-      <div className="flex gap-10 h-full">
-        {/* Left 40% Image */}
-        <div className="w-[40%] relative rounded-sm overflow-hidden border border-[#E9ECEF]">
-          <img
-            src="https://images.unsplash.com/photo-1500367215255-0e0b2013980d?q=80&w=1000&auto=format&fit=crop"
-            className="w-full h-full object-cover grayscale-[20%] sepia-[10%]"
-            alt="Muddy wetland"
-          />
+      <div className="flex gap-10 h-[520px]">
+        {/* Left 40% Images */}
+        <div className="w-[40%] flex flex-col gap-3 justify-between">
+          <div className="flex-1 relative rounded-sm overflow-hidden border border-[#E9ECEF] shadow-sm">
+            <img
+              src={page2Img_1}
+              className="w-full h-full object-cover"
+              alt="Traditional manual investigation 1"
+            />
+          </div>
+          <div className="flex-1 relative rounded-sm overflow-hidden border border-[#E9ECEF] shadow-sm">
+            <img
+              src={page2Img_2}
+              className="w-full h-full object-cover"
+              alt="Traditional manual investigation 2"
+            />
+          </div>
         </div>
 
         {/* Right 60% Cards */}
-        <div className="w-[60%] flex flex-col gap-4 justify-start py-0">
+        <div className="w-[60%] flex flex-col gap-4 justify-center py-0">
           {[
-            { num: "01", title: "滩涂泥泞 · 效率瓶颈", icon: <Navigation size={22} />, desc: "人工“拉样方”寸步难行，耗时动辄数月，且面临潮汐与陷溺安全隐患。" },
-            { num: "02", title: "郁闭密集 · 精度局限", icon: <Eye size={22} />, desc: "通用卫星遥感无法穿透密集交错的林冠，单株级计数误差大，难以识别具体树种。" },
+            { num: "01", title: "滩涂泥泞 · 效率瓶颈", icon: <Navigation size={22} />, desc: "人工“拉样方”寸步难行，耗时动辄数十日至数月，且面临潮汐与陷溺安全风险。" },
+            { num: "02", title: "样方偏差 · 精度局限", icon: <Eye size={22} />, desc: "人工抽样范围有限，样本代表性不足，同时受制于人员的主观因素，难以反映大尺度区域的真实生态状况。" },
             { num: "03", title: "地理数据 · 安全红线", icon: <ShieldAlert size={22} />, desc: "高精度正射影像（DOM）属政企内部高敏感数据，传统云端 AI 交付第三方处理，存在泄密与合规风险。" }
           ].map((item, i) => (
             <div key={i} className="bg-[#F8F9FA] px-6 py-4.5 rounded-sm flex gap-6 items-start border border-transparent hover:border-[#E9ECEF] transition-colors shadow-sm">
@@ -178,35 +185,35 @@ const Page3 = () => (
 
       <div className="flex gap-8 h-full">
         {/* Left Column (2/3 width) */}
-        <div className="w-[64%] flex flex-col justify-between">
+        <div className="w-[65%] flex flex-col justify-start gap-6">
           {/* Top: ROI Table */}
-          <div className="w-full">
+          <div className="w-full mb-3">
             <div className="flex items-center gap-2 mb-3">
               <BarChart size={18} className="text-[#00A35C]" />
-              <h3 className="text-[15px] font-bold text-[#1E293B]">百倍效能跃升 —— 核心价值 ROI 对比</h3>
+              <h3 className="text-[18px] font-bold text-[#1E293B]">百倍效能跃升 —— 核心价值 ROI 对比</h3>
             </div>
-            <div className="w-full border border-[#E9ECEF] rounded-sm bg-[#F8F9FA] overflow-hidden shadow-sm">
+            <div className="w-full border border-[#E9ECEF] rounded-sm bg-white overflow-hidden shadow-sm">
               <table className="w-full text-left border-collapse text-[13px]">
                 <thead>
-                  <tr className="border-b border-[#E9ECEF] bg-[#F8F9FA]">
-                    <th className="p-3 font-bold text-[#1E293B] w-[22%]">评估维度</th>
-                    <th className="p-3 font-bold text-[#475569] w-[30%]">传统人工调查</th>
-                    <th className="p-3 font-bold text-[#005C3E] w-[30%]">MVAS平台</th>
-                    <th className="p-3 font-bold text-[#00A35C] w-[18%]">效能提升</th>
+                  <tr className="border-b border-[#E9ECEF] bg-[#c5d2e1ff]">
+                    <th className="py-1.5 px-3 font-bold text-[#1E293B] w-[18%] ">评估维度</th>
+                    <th className="py-1.5 px-3 font-bold text-[#475569] w-[25%] ">传统人工调查</th>
+                    <th className="py-1.5 px-3 font-bold text-[#005C3E] w-[28%] ">MVAS平台</th>
+                    <th className="py-1.5 px-3 font-bold text-[#00A35C] w-[23%] ">效能提升</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#E9ECEF] bg-white">
                   {[
-                    ["万亩作业周期", "10人团队 / 15-20 个工作日", "单人航拍 + 2 小时本地 AI 分析", "效率跃升 60倍+"],
-                    ["检测精度与粒度", "抽样“拉样方”估算，误差大", "100%全域单株级高精分割与计数", "精度极度细化"],
-                    ["作业安全系数", "滩涂陷入、潮汐，风险高", "无人机航拍，人员安全零接触", "现场安全零风险"],
-                    ["地理数据合规", "涉密DOM数据上云，风险高", "100%本地私有化，数据零上云", "数据泄露零风险"]
+                    ["万亩作业周期", "10人团队 / 15-20 天", "单人航拍，1小时 AI 分析", "效率跃升 60倍+"],
+                    ["检测精细度", "“拉样方”估算，误差大", "100%全域单株级高精分割与计数", "精度极度细化"],
+                    ["作业安全系数", "滩涂陷入，风险高", "无人机遥控作业", "现场安全零风险"],
+                    ["生态指标数量", "数量固定，若扩展需重新实地拉样方", "植株长势、树种、数量、株距、株高、覆盖率等多种维度", "生态指标更丰富"]
                   ].map((row, i) => (
                     <tr key={i} className="hover:bg-[#F8F9FA]/50 transition-colors">
-                      <td className="p-3 font-bold text-[#475569] bg-[#F8F9FA]/50">{row[0]}</td>
-                      <td className="p-3 text-[#475569]">{row[1]}</td>
-                      <td className="p-3 font-medium text-[#005C3E]">{row[2]}</td>
-                      <td className="p-3 font-bold text-[#00A35C]">{row[3]}</td>
+                      <td className="py-1.5 px-3 font-bold text-[#475569]">{row[0]}</td>
+                      <td className="py-1.5 px-3 text-[#475569]">{row[1]}</td>
+                      <td className="py-1.5 px-3 font-medium text-[#005C3E]">{row[2]}</td>
+                      <td className="py-1.5 px-3 font-bold text-[#00A35C]">{row[3]}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -216,56 +223,95 @@ const Page3 = () => (
 
           {/* Bottom: 3 Advantages stacked vertically */}
           <div className="flex flex-col gap-3">
-            {[
-              { title: "数据本地安全 (Secure)", icon: <ShieldAlert size={18} />, desc: "100% 局域网内网部署，敏感地理数据零上云，完美规避安全与合规红线。" },
-              { title: "算力自主吞吐 (Dedicated)", icon: <Cpu size={18} />, desc: "独占本地 GPU 算力，无排队与带宽限制，万亩级大图小时级极速出图。" },
-              { title: "极简内网访问 (Web-Client)", icon: <Network size={18} />, desc: "标准 Web 浏览器一键访问，多终端免插件部署，实现极简内网协同办公。" }
-            ].map((adv, i) => (
-              <div key={i} className="bg-[#F8F9FA] p-3.5 rounded-sm border border-transparent hover:border-[#E9ECEF] transition-all duration-300 flex gap-4 items-start shadow-sm hover:shadow-md hover:bg-white">
-                <div className="bg-[#E6F3EE] p-2 rounded-full shrink-0 text-[#005C3E] border border-[#005C3E]/10">
-                  {adv.icon}
+            <div className="flex items-center gap-2 ">
+              <BarChart size={18} className="text-[#00A35C]" />
+              <h3 className="text-[18px] font-bold text-[#1E293B]">平台优势</h3>
+            </div>
+            <div className="flex flex-col">
+              {[
+                { title: "无人机航测 + 常态化智能监测", icon: <Navigation size={18} />, desc: "轻松覆盖万亩滩涂，实现极度降本增效；联动智能无人机机巢，支持全天候高频次常态化核查。" },
+                { title: "AI高效推理 + 数据可视化", icon: <Bot size={18} />, desc: "依托自研高精度图像识别大模型，从田间到报表，生态资产轻松监控，植株长势、树种、数量、株距、株高、覆盖率等数据精准触达。" },
+                { title: "内网私有化部署 + 数据绝对安全", icon: <Database size={18} />, desc: "敏感数据零第三方接触，保障绝对合规；100%政企内网私有化运行，支持标准Web服务多端协同。" }
+              ].map((adv, i) => (
+                <div key={i} className="w-[90%] bg-transparent py-1 px-3 rounded-sm border border-transparent hover:border-[#E9ECEF] transition-all duration-300 flex gap-4 items-start shadow-none hover:shadow-md hover:bg-white">
+                  <div className="bg-[#E6F3EE] p-3 rounded-full shrink-0 text-[#005C3E] border border-[#005C3E]/10">
+                    {adv.icon}
+                  </div>
+                  <div>
+                    <h4 className="text-[16.5px] font-bold text-[#1E293B] mb-1">{adv.title}</h4>
+                    <p className="text-[14px] text-[#475569] leading-relaxed">{adv.desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="text-[13.5px] font-bold text-[#1E293B] mb-1">{adv.title}</h4>
-                  <p className="text-[12px] text-[#475569] leading-relaxed">{adv.desc}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Right Column (1/3 width) */}
         <div className="w-[36%] flex flex-col">
-          <div className="bg-[#F8F9FA] rounded-sm border border-[#E9ECEF] p-5 flex flex-col justify-between flex-1 relative overflow-hidden shadow-sm">
-            {/* Header inside flowchart */}
-            <div className="flex items-center gap-2 mb-6 border-b border-[#E9ECEF] pb-3">
-              <div className="w-1.5 h-4 bg-[#005C3E]"></div>
-              <h3 className="text-[14px] font-bold text-[#1E293B] uppercase tracking-wider">智能数据处理流向</h3>
-            </div>
+          <div className="flex items-center gap-2 mb-3">
+            <BarChart size={18} className="text-[#00A35C]" />
+            <h3 className="text-[18px] font-bold text-[#1E293B]">平台工作流</h3>
+          </div>
+          <div className="flex flex-col justify-center items-center flex-1 font-sans">
+            <div className="relative z-10 flex flex-col items-center justify-center gap-0 w-full py-1 text-center">
 
-            {/* Vertical timeline */}
-            <div className="relative flex flex-col justify-between flex-1 pl-1">
-              {/* Connecting line */}
-              <div className="absolute left-[19px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-[#005C3E] via-[#00A35C] to-[#E9ECEF]/50"></div>
+              {/* Step 1: 无人机航测 */}
+              <div className="bg-[#E6F3EE] border-2 border-[#00A35C] rounded-sm py-2 px-5 shadow-sm w-fit mx-auto transition-transform hover:scale-[1.02]">
+                <h4 className="text-[15.5px] font-bold text-[#005C3E] whitespace-nowrap">全自主无人机航测</h4>
+              </div>
 
-              {[
-                { step: "01", title: "影像物理导入", desc: "本地独立终端物理介质导入，保证绝对数据隔离" },
-                { step: "02", title: "BladeMgv™ AI识别", desc: "独占GPU本地算力，自研检测模型并行加速" },
-                { step: "03", title: "生态数据核算", desc: "自动计算林区覆盖度、单株树种与蓝碳碳储量" },
-                { step: "04", title: "内网多端交互", desc: "内网标准 Web 服务，任意终端免密、安全协同查看" }
-              ].map((item, i) => (
-                <div key={i} className="flex gap-4 items-start relative z-10 group">
-                  {/* Timeline node */}
-                  <div className="w-10 h-10 rounded-full bg-white border-2 border-[#005C3E] text-[#005C3E] font-bold font-mono text-[12px] flex items-center justify-center shadow-sm shrink-0 group-hover:bg-[#005C3E] group-hover:text-white transition-all duration-300">
-                    {item.step}
-                  </div>
-                  {/* Step details card */}
-                  <div className="bg-white border border-[#E9ECEF] rounded-sm p-3 shadow-sm flex-1 hover:border-[#00A35C] hover:shadow-md transition-all duration-300">
-                    <h4 className="text-[13px] font-bold text-[#1E293B] mb-0.5">{item.title}</h4>
-                    <p className="text-[11px] text-[#475569] leading-relaxed">{item.desc}</p>
-                  </div>
+              {/* Conspicuous Arrow touching top and bottom */}
+              <svg className="w-5 h-8 text-[#00A35C] mx-auto shrink-0 block" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 0v24M7 17l5 7 5-7" />
+              </svg>
+
+              {/* Step 2: 正射影像合成 */}
+              <div className="bg-[#EDF2F7] border-2 border-[#4A5568] rounded-sm py-2 px-5 shadow-sm w-fit mx-auto transition-transform hover:scale-[1.02]">
+                <h4 className="text-[15.5px] font-bold text-[#2D3748] whitespace-nowrap">正射影像自动合成</h4>
+              </div>
+
+              {/* Conspicuous Arrow touching top and bottom */}
+              <svg className="w-5 h-8 text-[#00A35C] mx-auto shrink-0 block" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 0v24M7 17l5 7 5-7" />
+              </svg>
+
+              {/* Step 3: Run AI (3 Branches horizontal) */}
+              <div className="bg-[#F0F7F4] border-2 border-[#00A35C] rounded-sm p-2.5 w-fit min-w-[250px] mx-auto shadow-sm transition-transform hover:scale-[1.02]">
+                <h4 className="text-[14.5px] font-bold text-[#005C3E] mb-2 whitespace-nowrap">BladeMgv™ AI推理</h4>
+                <div className="grid grid-cols-3 gap-1">
+                  {[
+                    "单株检测",
+                    "树种识别",
+                    "存活度"
+                  ].map((name, idx) => (
+                    <div key={idx} className="bg-white border-2 border-[#00A35C]/60 rounded-sm py-1 px-2 shadow-xs flex items-center justify-center min-h-[34px] w-fit mx-auto">
+                      <span className="text-[11.5px] font-bold text-[#1E293B] leading-tight whitespace-nowrap">{name}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              {/* Conspicuous Arrow touching top and bottom */}
+              <svg className="w-5 h-8 text-[#00A35C] mx-auto shrink-0 block" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 0v24M7 17l5 7 5-7" />
+              </svg>
+
+              {/* Step 4: 生态指标核算 */}
+              <div className="bg-[#F5F3FF] border-2 border-[#6D28D9] rounded-sm py-2 px-5 shadow-sm w-fit mx-auto transition-transform hover:scale-[1.02]">
+                <h4 className="text-[15.5px] font-bold text-[#5B21B6] whitespace-nowrap">生态指标多维核算</h4>
+              </div>
+
+              {/* Conspicuous Arrow touching top and bottom */}
+              <svg className="w-5 h-8 text-[#00A35C] mx-auto shrink-0 block" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 0v24M7 17l5 7 5-7" />
+              </svg>
+
+              {/* Step 5: 报表产出 */}
+              <div className="bg-[#FFFBEB] border-2 border-[#D97706] rounded-sm py-2 px-5 shadow-sm w-fit mx-auto transition-transform hover:scale-[1.02]">
+                <h4 className="text-[15.5px] font-bold text-[#92400E] whitespace-nowrap">一站式报表产出</h4>
+              </div>
+
             </div>
           </div>
         </div>
@@ -277,288 +323,303 @@ const Page3 = () => (
 // === P4: 核心科技 I ===
 const Page4 = () => (
   <Page>
-    <PageContent className="justify-between">
+    <PageContent className="justify-start pb-4">
       <Header
-        title="BladeMgv™ 刃蓝高精单株检测网络"
+        title="BladeMgv™ 刃蓝AI模型──高精单株识别专家"
         subtitle="Proprietary Deep Learning Detection Network for Dense Canopies"
       />
 
-      <p className="text-[#475569] text-[15px] max-w-4xl leading-relaxed mb-6">
-        <strong className="text-[#1E293B] font-bold">BladeMgv™</strong> 是专为密集、交错的红树林植被定制的自研深度学习检测网络。
+      <p className="text-[#475569] text-[15px] max-w-4xl leading-relaxed mb-4">
+        <strong className="text-[#1E293B] font-bold">BladeMgv™</strong> 是专为复杂滩涂、细小幼苗、密集冠幅的红树林研发的深度学习检测网络。同时具备高精度的单株识别、树种分类、存活度检测、长势评估等功能。
       </p>
 
-      <div className="flex gap-8 relative mb-10 h-[280px]">
-        {/* Before Image */}
-        <div className="w-1/2 h-full border border-[#E9ECEF] p-2 bg-[#F8F9FA] rounded-sm relative">
+      <div className="flex gap-4 relative mb-4 h-[430px]">
+        {/* Left Image: page4TargetImg */}
+        <div className="w-1/2 h-full border-2 border-[#E9ECEF] bg-[#F8F9FA] rounded-sm relative group overflow-hidden shadow-sm">
           <img
-            src="https://images.unsplash.com/photo-1542272201-b1ca555f8505?q=80&w=1000&auto=format&fit=crop"
-            className="w-full h-full object-cover rounded-sm"
-            alt="Raw drone footage"
+            src={page4TargetImg}
+            className="w-full h-full object-cover rounded-sm transition-transform duration-500 group-hover:scale-105"
+            alt="小目标高精度单株检测效果"
           />
-          <div className="absolute bottom-4 left-4 bg-white/90 px-3 py-1.5 rounded-sm shadow-sm text-[12px] font-bold text-[#1E293B]">
-            原始高分正射影像 (RGB)
+          <div className="absolute bottom-4 left-4 bg-transparent text-[13.5px] font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] flex items-center gap-2">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#00FF87] shadow-[0_0_8px_#00FF87] animate-pulse"></div>
+            珠三角某项目小目标红树识别。<span className="text-[#00FF87] font-bold">准确率≥98%，召回率≥92%</span>
           </div>
         </div>
 
-        {/* VS Arrow */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full border border-[#E9ECEF] flex items-center justify-center z-10 shadow-md">
-          <ArrowRight className="text-[#00A35C]" size={20} />
-        </div>
-
-        {/* After Image (Simulated AI Masking) */}
-        <div className="w-1/2 h-full border border-[#E9ECEF] p-2 bg-[#F8F9FA] rounded-sm relative">
-          <div className="w-full h-full relative overflow-hidden rounded-sm bg-gray-100">
-            <img
-              src="https://images.unsplash.com/photo-1542272201-b1ca555f8505?q=80&w=1000&auto=format&fit=crop"
-              className="w-full h-full object-cover"
-              alt="AI Processed"
-            />
-            {/* Overlay grid & dots to simulate AI bounding boxes with tech green */}
-            <div className="absolute inset-0 bg-[#00A35C]/10 mix-blend-multiply"></div>
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMTUiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwQzI3MiIgc3Ryb2tlLXdpZHRoPSIxIiBzdHJva2UtZGFzaGFycmF5PSIyIDIiIG9wYWNpdHk9IjAuNiIvPjxwYXRoIGQ9Ik0yMCAyMHYtMm0wIDR2LTJtMiAySDIwbS0yIDBoMiIgc3Ryb2tlPSIjMDA1QzNFIi8+PC9zdmc+')] opacity-60"></div>
-          </div>
-          <div className="absolute bottom-4 left-4 bg-white/90 px-3 py-1.5 rounded-sm shadow-sm text-[12px] font-bold text-[#005C3E] border border-[#00A35C]/30 flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-[#00A35C]"></div>
-            AI 高精单株分割掩膜
+        {/* Right Image: coverImg */}
+        <div className="w-1/2 h-full border-2 border-[#E9ECEF] bg-[#F8F9FA] rounded-sm relative group overflow-hidden shadow-sm">
+          <img
+            src={coverImg}
+            className="w-full h-full object-cover rounded-sm transition-transform duration-500 group-hover:scale-105"
+          />
+          <div className="absolute bottom-4 left-4 bg-transparent text-[13.5px] font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] flex items-center gap-2">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#38BDF8] shadow-[0_0_8px_#38BDF8] animate-pulse"></div>
+            高郁闭度密集交错红树单株识别。<span className="text-[#00FF87] font-bold">IOU≥90%</span>
           </div>
         </div>
       </div>
 
       {/* Bottom Features */}
-      <div className="flex gap-10">
+      <div className="flex gap-3 mb-4">
         <div className="w-1/3">
-          <h4 className="text-[#1E293B] font-bold mb-3 flex items-center gap-2 text-[15px]">
-            <span className="w-1.5 h-4 bg-[#005C3E]"></span> 穿透密集重叠
+          <h4 className="text-[#1E293B] font-bold flex items-center gap-2 text-[15px]">
+            <span className="w-1.5 h-4 bg-[#005C3E]"></span> 穿透高稠密重叠
           </h4>
-          <p className="text-[#475569] text-[13.5px] leading-relaxed">自研多尺度特征融合与自适应注意力机制，厘米级精准分割边缘交错的密集郁闭林冠。</p>
+          <p className="text-[#475569] text-[13.5px] leading-relaxed">自研多尺度特征融合与自适应注意力机制，厘米级精准辨别密集郁闭林冠下的单株红树。</p>
         </div>
         <div className="w-1/3">
-          <h4 className="text-[#1E293B] font-bold mb-3 flex items-center gap-2 text-[15px]">
+          <h4 className="text-[#1E293B] font-bold flex items-center gap-2 text-[15px]">
             <span className="w-1.5 h-4 bg-[#005C3E]"></span> 消除小株漏检
           </h4>
-          <p className="text-[#475569] text-[13.5px] leading-relaxed">针对幼苗期与生长初期的细小树冠进行局部特征重建，单株最小检出冠幅达分米级。</p>
+          <p className="text-[#475569] text-[13.5px] leading-relaxed">针对细小初生幼苗与小冠幅特征实施高保真局部重建，彻底扫除行业小目标漏检盲区。</p>
         </div>
         <div className="w-1/3">
-          <h4 className="text-[#1E293B] font-bold mb-3 flex items-center gap-2 text-[15px]">
+          <h4 className="text-[#1E293B] font-bold flex items-center gap-2 text-[15px]">
             <span className="w-1.5 h-4 bg-[#005C3E]"></span> 工业级性能
           </h4>
-          <p className="text-[#475569] text-[13.5px] leading-relaxed mb-2">本地 GPU 算力硬件级加速，万亩林区数分钟即可完成单株分割，兼顾极速与极准。</p>
-          <div className="text-[13px] font-mono text-[#005C3E] font-bold">
-            IoU ≥ 88% <span className="mx-2 text-[#E9ECEF]">|</span> Recall ≥ 95%
-          </div>
+          <p className="text-[#475569] text-[13.5px] leading-relaxed">本地 GPU 算力硬件级加速，1小时检测万亩林区，实现全栈高效率与高精准度的完美统一。</p>
         </div>
+      </div>
+
+      {/* Bottom Project Footnote */}
+      <div className="mt-auto border-t border-[#E9ECEF] pt-2 w-full">
+        <p className="text-[#94A3B8] text-[11px] text-right italic tracking-wide font-medium">
+          * 注：本手册所展示的所有高精单株识别与树种分类等效果图，均来源于我司与相关政企单位的真实合作项目。
+        </p>
       </div>
     </PageContent>
   </Page>
 );
 
-// === P5: 核心科技 II ===
+// === P5: 核心科技 II - 树种分类 ===
 const Page5 = () => (
   <Page>
-    <PageContent>
+    <PageContent className="justify-start pb-4">
       <Header
-        title="复杂环境下的高容错智能化树种分类"
-        subtitle="High-Tolerance Intelligent Tree Species Classification"
+        title="BladeMgv™ 刃蓝AI模型──高精多维度树种识别"
+        subtitle="High-Precision Multi-Dimensional Mangrove Species Identification"
       />
 
-      <p className="text-[#475569] text-[15px] max-w-4xl leading-relaxed mb-6">
-        <strong className="text-[#1E293B] font-bold">BladeMgv™</strong> 提取高阶空谱特征，告别人工目视判读，实现高容错、自动化的树种分割识别。
+      <p className="text-[#475569] text-[14.5px] max-w-4xl leading-relaxed mb-4">
+        <strong className="text-[#1E293B] font-bold">BladeMgv™</strong> 提取高维空间-光谱耦合特征，突破传统人工目视解译与单一空谱分类的局限性，实现针对优势树种的工业级全自动识别。
       </p>
 
-      <div className="mb-8 flex gap-6 text-[13.5px] bg-[#F8F9FA] p-5 rounded-sm border border-[#E9ECEF]">
-        <div className="font-bold text-[#1E293B] pr-6 border-r border-[#E9ECEF] flex items-center">三大环境<br />自适应特征</div>
-        <div className="text-[#475569] flex-1 flex flex-col justify-center"><strong className="text-[#005C3E] mb-1">● 自适应潮汐涨落：</strong>自动校准并识别被潮水部分淹没的冠幅形态，保障水陆过渡带精度。</div>
-        <div className="text-[#475569] flex-1 flex flex-col justify-center px-4 border-l border-r border-[#E9ECEF]"><strong className="text-[#005C3E] mb-1">● 光影阴影高容错：</strong>强力抵抗复杂云影、树冠投影及光照不均等恶劣环境干扰。</div>
-        <div className="text-[#475569] flex-1 flex flex-col justify-center pl-2"><strong className="text-[#005C3E] mb-1">● 伴生背景精剔除：</strong>智能识别并过滤滩涂、水体、杂草，精准锁定红树林主体。</div>
+      {/* 3 Detail Segmentation Images */}
+      <div className="flex gap-4 mb-4 h-[300px] w-full">
+        {[
+          { img: classImg1, label: "AI 优势树种光谱掩膜" },
+          { img: classImg2, label: "精细化郁闭斑块分割" },
+          { img: classImg3, label: "跨区域植被群落划分" }
+        ].map((item, idx) => (
+          <div key={idx} className="w-1/3 h-full border border-[#E9ECEF] rounded-sm relative group overflow-hidden shadow-xs">
+            <img src={item.img} className="w-full h-full object-cover rounded-sm transition-transform duration-500 group-hover:scale-105" alt={item.label} />
+            {/* <div className="absolute bottom-2 left-2 bg-transparent text-[11px] font-bold text-white drop-shadow-[0_1.5px_3px_rgba(0,0,0,0.9)] flex items-center gap-1.5">
+              <div className="w-2 h-2 rounded-full bg-[#00FF87] shadow-[0_0_6px_#00FF87] animate-pulse"></div>
+              {item.label}
+            </div> */}
+          </div>
+        ))}
       </div>
 
-      <div className="mb-4">
-        <h4 className="font-bold text-[#1E293B] text-[15px] mb-4">已支持优势树种</h4>
-        {/* Species Grid */}
-        <div className="grid grid-cols-3 gap-[18px]">
-          {[
-            { name: "红海榄", lat: "Rhizophora stylosa", color: "#00A35C", img: "https://images.unsplash.com/photo-1615569562725-b91ec0bafda0?q=80&w=600&auto=format&fit=crop" },
-            { name: "白骨壤", lat: "Avicennia marina", color: "#A3E635", img: "https://images.unsplash.com/photo-1596328346061-460d3fc0e7dc?q=80&w=600&auto=format&fit=crop" },
-            { name: "桐花树", lat: "Aegiceras corniculatum", color: "#34D399", img: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=600&auto=format&fit=crop" }
-          ].map((item, i) => (
-            <div key={i} className="border border-[#E9ECEF] bg-white flex flex-col p-2 rounded-sm">
-              <div className="h-32 relative overflow-hidden rounded-sm bg-[#F8F9FA]">
-                <img src={item.img} alt={item.name} className="w-full h-full object-cover" />
-                {/* Mask simulation */}
-                <div className="absolute inset-0 opacity-40 mix-blend-multiply" style={{ backgroundColor: item.color }}></div>
-                <div className="absolute bottom-2 right-2 px-2 py-1 bg-white/90 text-[10px] font-bold rounded-sm border border-black/10" style={{ color: COLORS.brand }}>
-                  AI 语义分割掩膜
-                </div>
-              </div>
-              <div className="p-3 text-center">
-                <h3 className="text-[16px] font-bold text-[#1E293B] mb-0.5">{item.name}</h3>
-                <p className="text-[12px] text-[#475569] italic font-serif">{item.lat}</p>
-              </div>
-            </div>
-          ))}
+      {/* 2 Species Distribution Charts */}
+      <div className="flex gap-4 mb-4 h-[225px] w-full">
+        <div className="w-1/2 h-full border border-[#E9ECEF] bg-white p-1.5 rounded-sm relative group overflow-hidden shadow-xs">
+          <img src={classChart1} className="w-full h-full object-contain rounded-sm transition-transform duration-500 group-hover:scale-[1.02]" alt="优势红树树种分布统计" />
+          <div className="absolute bottom-0 right-2 bg-white/90 border border-[#E2E8F0] px-2 py-0.5 rounded-sm text-[11.5px] font-bold text-[#1E293B] flex items-center gap-1.5 shadow-sm">
+            <div className="w-2 h-2 rounded-full bg-[#3B82F6] shadow-[0_0_6px_#3B82F6] animate-pulse"></div>
+            优势红树树种分布统计
+          </div>
+        </div>
+        <div className="w-1/2 h-full border border-[#E9ECEF] bg-white p-1.5 rounded-sm relative group overflow-hidden shadow-xs">
+          <img src={classChart2} className="w-full h-full object-contain rounded-sm transition-transform duration-500 group-hover:scale-[1.02]" alt="树种冠幅统计" />
+          <div className="absolute bottom-0 right-2 bg-white/90 border border-[#E2E8F0] px-2 py-0.5 rounded-sm text-[11.5px] font-bold text-[#1E293B] flex items-center gap-1.5 shadow-sm">
+            <div className="w-2 h-2 rounded-full bg-[#38BDF8] shadow-[0_0_6px_#38BDF8] animate-pulse"></div>
+            不同树种平均冠幅分析
+          </div>
         </div>
       </div>
 
       {/* Bottom Note */}
-      <div className="mt-auto border-t border-[#E9ECEF] pt-4">
-        <div className="text-[11.5px] text-[#475569] leading-relaxed">
-          <span className="text-[#005C3E] font-bold">* 多源数据拓展服务说明：</span>
-          本系统(MVAS)聚焦于高性价比 RGB 无人机正射影像。刃蓝科技同时提供针对“多光谱/高光谱”与“激光雷达(LiDAR)”等高阶遥感数据的定制系统，满足树高精准测量与林分蓄积量估算需求。
-        </div>
+      <div className="mt-auto border-t border-[#E9ECEF] pt-2 w-full">
+        <p className="text-[#94A3B8] text-[11px] text-right italic tracking-wide font-medium">
+          * 注：数据分析图表中，QQ 表示秋茄 ，THS 表示桐花树 ，BGR 表示白骨壤，HHL 表示红海榄，ML 表示木榄 ，GG 表示死亡植株，TREE 表示其他混生林木。
+        </p>
       </div>
     </PageContent>
   </Page>
 );
 
-// === P6: 场景 I ===
+// === P6: 核心科技 III - 极限复杂环境自适应容错 ===
 const Page6 = () => (
   <Page>
-    <PageContent>
+    <PageContent className="justify-start pb-4">
       <Header
-        title="林业生态资产普查与常态化监测"
-        subtitle="Eco-Asset Inventory and Routine Forestry Monitoring"
+        title="BladeMgv™ 刃蓝AI模型──复杂环境自适应容错"
+        subtitle="Extreme Complex Environment Adaptive Extraction & Fault-Tolerance"
       />
 
-      <p className="text-[14px] text-[#475569] mb-8">
-        <strong className="text-[#1E293B] mr-2">目标受众：</strong>地方林业局、生态环境局、保护区管理局、湿地公园、林业设计院。
+      <p className="text-[#475569] text-[14.5px] max-w-4xl leading-relaxed mb-4">
+        <strong className="text-[#1E293B] font-bold">BladeMgv™</strong> 针对低信噪比与高噪点背景进行了深度优化，可高容错自动剔除滩涂水体、识别异形云影，并在杂木杂草混生区域保持识别纯净度，解决实际普查场景中95%以上的高难度噪点干扰。
       </p>
 
-      <div className="flex gap-10 h-full">
-        {/* Left 55% - Light Theme Dashboard */}
-        <div className="w-[55%] bg-[#F8F9FA] rounded-sm border border-[#E9ECEF] p-4 flex flex-col relative overflow-hidden shadow-inner">
-          <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#E9ECEF]">
-            <div className="font-bold text-[#1E293B] text-sm flex items-center gap-2">
-              <Map size={16} className="text-[#005C3E]" /> 监测范围: 淇澳岛红树林保护区
-            </div>
-            <div className="flex gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#00A35C] mt-1"></span>
-              <span className="text-xs text-[#475569]">系统在线</span>
-            </div>
-          </div>
-
-          <div className="flex-1 flex gap-4">
-            {/* Map Area */}
-            <div className="flex-1 bg-white border border-[#E9ECEF] relative rounded-sm overflow-hidden p-1">
-              <div className="w-full h-full bg-gray-100 relative overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1542272201-b1ca555f8505?q=80&w=800&auto=format&fit=crop" className="w-full h-full object-cover opacity-60 mix-blend-luminosity" />
-                {/* Simulate heat/density map dots */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#00A35C_1px,transparent_1px)] bg-[size:10px_10px] opacity-30"></div>
-              </div>
-              <div className="absolute top-3 left-3 bg-white px-2 py-1 rounded shadow-sm text-[10px] font-bold text-[#1E293B] border border-[#E9ECEF] flex items-center gap-2">
-                <Eye size={12} className="text-[#005C3E]" /> 单株定位图层
-              </div>
-            </div>
-
-            {/* Stats Area */}
-            <div className="w-[140px] flex flex-col gap-3">
-              <div className="bg-white border border-[#E9ECEF] p-3 rounded-sm text-center shadow-sm">
-                <div className="text-[10px] text-[#475569] mb-1">全域单株总数</div>
-                <div className="text-[18px] font-bold text-[#005C3E] font-mono">142,508</div>
-              </div>
-              <div className="bg-white border border-[#E9ECEF] p-3 rounded-sm text-center shadow-sm">
-                <div className="text-[10px] text-[#475569] mb-1">林区覆盖度</div>
-                <div className="text-[18px] font-bold text-[#005C3E] font-mono">87.3%</div>
-              </div>
-              <div className="flex-1 bg-white border border-[#E9ECEF] p-3 rounded-sm flex flex-col justify-end shadow-sm relative overflow-hidden">
-                <div className="text-[10px] text-[#475569] absolute top-3 left-3">生长趋势</div>
-                {/* Fake chart bars */}
-                <div className="flex items-end gap-1 h-12 w-full mt-auto opacity-70">
-                  <div className="w-full bg-[#E9ECEF] h-[40%]"></div>
-                  <div className="w-full bg-[#E9ECEF] h-[55%]"></div>
-                  <div className="w-full bg-[#E9ECEF] h-[45%]"></div>
-                  <div className="w-full bg-[#00A35C] h-[80%]"></div>
-                </div>
-              </div>
-            </div>
+      {/* GIS Dashboard Images Layout */}
+      <div className="flex gap-4 mb-4 h-[450px] w-full">
+        {/* Left Column (55% width) - Large Scale Overview */}
+        <div className="w-[55%] h-full border-2 border-[#E9ECEF] bg-[#F8F9FA] rounded-sm relative group overflow-hidden shadow-sm">
+          <img
+            src={toleranceImg3}
+            className="w-full h-full object-cover rounded-sm transition-transform duration-500 group-hover:scale-105"
+            alt="大尺度广域高容错识别总览"
+          />
+          <div className="absolute bottom-4 left-4 bg-transparent text-[13px] font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] flex items-center gap-2">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#00FF87] shadow-[0_0_8px_#00FF87] animate-pulse"></div>
+            大尺度广域高容错识别总览图
           </div>
         </div>
 
-        {/* Right 45% - Cards */}
-        <div className="w-[45%] flex flex-col gap-4">
-          {[
-            { title: "常态化资产普查（小时级分析）", icon: <BarChart size={18} />, desc: "一键生成林区生态报告，自动统计全域林区覆盖度、单株总数、冠幅面积分布。" },
-            { title: "全周期生长监测（厘米级轨迹）", icon: <Network size={18} />, desc: "自动比对历史影像，精准量化单株冠幅变化趋势，科学评估人工修复林存活率。" },
-            { title: "退化与入侵早期预警", icon: <ShieldAlert size={18} />, desc: "精准定位林木枯死与病虫害斑块，早期发现并拦截互花米草等外来物种入侵。" }
-          ].map((item, i) => (
-            <div key={i} className="flex-1 bg-[#F8F9FA] px-6 py-5 rounded-sm border border-transparent hover:border-[#E9ECEF] shadow-sm flex flex-col justify-center hover:bg-white transition-all duration-300 hover:shadow-md">
-              <h4 className="font-bold text-[#1E293B] text-[14.5px] mb-2 flex items-center gap-2">
-                <span className="text-[#005C3E]">{item.icon}</span> {item.title}
-              </h4>
-              <p className="text-[12.5px] text-[#475569] leading-relaxed pl-7">{item.desc}</p>
+        {/* Right Column (45% width) - Detail Demos */}
+        <div className="w-[45%] h-full flex flex-col gap-4">
+          {/* Top Image: toleranceImg1 */}
+          <div className="h-1/2 border-2 border-[#E9ECEF] bg-[#F8F9FA] rounded-sm relative group overflow-hidden shadow-sm">
+            <img
+              src={toleranceImg1}
+              className="w-full h-full object-cover rounded-sm transition-transform duration-500 group-hover:scale-105"
+              alt="杂草混生剔除"
+            />
+            <div className="absolute bottom-3 left-4 bg-transparent text-[12.5px] font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] flex items-center gap-2">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#38BDF8] shadow-[0_0_8px_#38BDF8] animate-pulse"></div>
+              混生杂草中保持识别准确率
             </div>
-          ))}
+          </div>
+
+          {/* Bottom Image: toleranceImg2 */}
+          <div className="h-1/2 border-2 border-[#E9ECEF] bg-[#F8F9FA] rounded-sm relative group overflow-hidden shadow-sm">
+            <img
+              src={toleranceImg2}
+              className="w-full h-full object-cover rounded-sm transition-transform duration-500 group-hover:scale-105"
+              alt="有难度背景提取"
+            />
+            <div className="absolute bottom-3 left-4 bg-transparent text-[12.5px] font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] flex items-center gap-2">
+              <div className="w-2.5 h-2.5 rounded-full bg-[#A855F7] shadow-[0_0_8px_#A855F7] animate-pulse"></div>
+              复杂泥水混合物高难度背景分离
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Note */}
+      <div className="mt-8 border-t border-[#E9ECEF] pt-2 w-full">
+        <div className="text-[11.5px] text-[#475569] leading-relaxed">
+          <span className="text-[#005C3E] font-bold">* 多源数据拓展服务说明：</span>
+          本产品聚焦于高性价比 RGB 无人机正射影像。刃蓝科技同时提供针对“多光谱/高光谱”与“激光雷达”等高阶遥感数据的定制，满足树高精准测量与林分蓄积量估算需求。
         </div>
       </div>
     </PageContent>
   </Page>
 );
 
-// === P7: 场景 II ===
+// === P7: 场景 I ===
 const Page7 = () => (
   <Page>
-    <PageContent>
+    <PageContent className="justify-start pb-4">
       <Header
-        title="单株级蓝碳资产核算与 ESG 科学计量"
-        subtitle="Individual-Tree Level Blue Carbon Accounting and ESG Verification"
+        title="MVAS助力林业生态资产普查标准化"
+        subtitle="Standardized Eco-Asset Inventory and Monitoring Powered by MVAS"
       />
 
-      <p className="text-[14px] text-[#475569] mb-4">
-        <strong className="text-[#1E293B] mr-2">目标受众：</strong>蓝碳项目投资商与开发商、ESG 咨询机构、碳汇核证机构、科研院所。
+      <p className="text-[#475569] text-[13.5px] leading-relaxed mb-4">
+        在大尺度宏观红树林生态系统的资产普查中，传统人工解译面临标准不一、周期漫长、盲区多等痛点。<br /><strong>MVAS 平台</strong> 为合作伙伴提供一站式的智能化数字监管方案，实现从超大区块遥感影像输入到厘米级普查结果交付的全面标准化流程。
       </p>
 
-      <div className="mb-8 font-bold text-[#005C3E] text-[16px]">
-        核心价值主张：让每一吨蓝碳，都有据可依，有迹可循。
-      </div>
+      {/* 2-Column Dashboard Layout (50/50 Split) */}
+      <div className="flex gap-24 mb-4 h-[530px] w-full items-start">
 
-      {/* Scientific Flowchart */}
-      <div className="flex items-center justify-center gap-4 bg-white px-6 py-6 rounded-sm border border-[#E9ECEF] shadow-sm mb-10 relative overflow-hidden">
-        {/* Math background shadow */}
-        <div className="absolute right-12 top-1/2 -translate-y-1/2 text-[80px] font-serif italic text-[#F8F9FA] font-bold pointer-events-none select-none">
-          ∑B_i
+        {/* Left Side (50%): Image fully displayed without cropping */}
+        <div className="w-[50%] h-full flex flex-col">
+          <div className="flex items-center gap-2 mb-2">
+            <Eye size={15} className="text-[#00A35C]" />
+            <h4 className="text-[16px] font-bold text-[#1E293B]">大面积生态资产监测项目示例</h4>
+          </div>
+          <div className="flex-1 border border-[#E9ECEF] rounded-sm overflow-hidden shadow-xs h-full">
+            <img
+              src={blockAnalysisImg}
+              className="w-full h-full object-cover rounded-sm"
+              alt="大区块统计分析与宏观生态普查能力"
+            />
+          </div>
         </div>
-        {/* Grid background */}
-        <div className="absolute inset-0 bg-[linear-gradient(#F8F9FA_1px,transparent_1px),linear-gradient(90deg,#F8F9FA_1px,transparent_1px)] bg-[size:20px_20px] opacity-50 pointer-events-none"></div>
 
-        {[
-          { title: "MVAS 精准分割", icon: <Eye size={20} />, desc: "获取厘米级单株边界" },
-          { title: "测算单冠面积", math: "S_i", desc: "智能提取冠幅投影面积" },
-          { title: "代入生物量公式", math: "B_i", desc: "生态物理反演碳汇数据" },
-          { title: "估算总碳储量", icon: <Database size={20} />, desc: "高置信度ESG数据链条" }
-        ].map((step, idx, arr) => (
-          <React.Fragment key={idx}>
-            <div className="flex flex-col items-center w-[180px] bg-[#F8F9FA] rounded-sm p-4 text-center border border-transparent hover:border-[#E9ECEF] hover:bg-white shadow-sm hover:shadow-md transition-all duration-300 relative z-10 group">
-              <div className="w-14 h-14 rounded-full bg-[#E6F3EE] text-[#005C3E] flex items-center justify-center mb-3 group-hover:bg-[#005C3E] group-hover:text-white transition-all duration-300 border border-[#005C3E]/20 shrink-0">
-                {step.icon ? step.icon : <span className="font-serif italic text-lg font-bold">{step.math}</span>}
-              </div>
-              <h4 className="font-bold text-[#1E293B] text-[13.5px] mb-1.5">{step.title}</h4>
-              <p className="text-[11.5px] text-[#475569] opacity-80 leading-normal">{step.desc}</p>
+        {/* Right Side (50%): Table on top, deliverables stack grouped closely below */}
+        <div className="w-[50%] h-full flex flex-col justify-start">
+
+          {/* Top of Right Side: Centered Custom-width Table */}
+          <div className="flex flex-col w-[390px] mx-auto">
+            <div className="flex items-center gap-2 mb-2">
+              <BarChart size={15} className="text-[#00A35C]" />
+              <h4 className="text-[16px] font-bold text-[#1E293B]">核心监测数据落表示例</h4>
             </div>
-            {idx < arr.length - 1 && (
-              <div className="w-10 h-10 rounded-full bg-[#E6F3EE] flex items-center justify-center shrink-0 shadow-sm border border-[#005C3E]/10 z-10">
-                <ArrowRight className="text-[#005C3E]" size={18} />
-              </div>
-            )}
-          </React.Fragment>
-        ))}
-      </div>
+            <div className="border border-[#E9ECEF] rounded-sm bg-white overflow-hidden shadow-xs w-full">
+              <table className="w-full text-left border-collapse text-[13px]">
+                <thead>
+                  <tr className="border-b border-[#E9ECEF] bg-[#c5d2e1ff]">
+                    <th className="py-1.5 px-4 font-bold text-[#1E293B] w-[30%] text-left">核算指标项</th>
+                    <th className="py-1.5 px-4 font-bold text-[#005C3E] w-[58%] text-left">普查实测数值</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#E9ECEF] bg-white">
+                  {[
+                    { label: "监测区域面积", val: "66,073 m²" },
+                    { label: "植株识别总量", val: "24,405 棵" },
+                    { label: "植株冠幅监测", val: "平均 0.216 m² [0.01~2.20]" },
+                    { label: "死亡植株定位", val: "1,673 棵" },
+                    { label: "识别保存密度", val: "3,694 棵/公顷" },
+                    { label: "关键成效指标", val: "成活率 83.19% | 健康度 93.6%" }
+                  ].map((row, idx) => (
+                    <tr key={idx} className="hover:bg-[#F8F9FA]/60 transition-colors">
+                      <td className="py-1.5 px-4 font-semibold text-[#1E293B] text-left">{row.label}</td>
+                      <td className="py-1.5 px-4 text-left font-mono font-bold text-[#005C3E]">{row.val}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-      {/* Features */}
-      <div className="grid grid-cols-3 gap-6">
-        <div className="bg-[#F8F9FA] p-6 rounded-sm border border-[#E9ECEF]">
-          <h4 className="font-bold text-[#1E293B] mb-3 text-[14px]">打破“粗放估算”，符合 VCS 等国际高标准核证</h4>
-          <p className="text-[12.5px] text-[#475569] leading-relaxed">提取每株红树林的真实“冠幅投影面积 ({"$S_{冠幅}$"})”，为碳储量计量提供高置信度底层数据。</p>
-        </div>
-        <div className="bg-[#F8F9FA] p-6 rounded-sm border border-[#E9ECEF]">
-          <h4 className="font-bold text-[#1E293B] mb-3 text-[14px]">科学的生物量反演数据链条</h4>
-          <p className="text-[12.5px] text-[#475569] leading-relaxed">基于单株精准测量，打通：冠幅面积 → 单株生物量 → 单株固碳量 → 全域碳储量。数据链条透明可追溯。</p>
-        </div>
-        <div className="bg-[#F8F9FA] p-6 rounded-sm border border-[#E9ECEF]">
-          <h4 className="font-bold text-[#1E293B] mb-3 text-[14px]">企业 ESG 项目成效可视化呈现</h4>
-          <p className="text-[12.5px] text-[#475569] leading-relaxed">为红树林生态修复项目提供可审计、直观的 AI 监测凭证，完美赋能企业 ESG 报告核心环境数据披露。</p>
+          {/* Bottom of Right Side: Deliverables in centered stack closely below table */}
+          <div className="w-[390px] mx-auto flex flex-col gap-1.5 mt-8">
+            <div className="flex items-center gap-2 mb-1">
+              <Navigation size={15} className="text-[#00A35C]" />
+              <h4 className="text-[16px] font-bold text-[#1E293B]">系统支持标准化普查成果输出</h4>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <div className="bg-transparent border border-[#E9ECEF] p-2.5 rounded-sm relative group hover:border-[#005C3E] transition-all duration-300">
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <span className="text-[8.5px] bg-[#E6F3EE] text-[#005C3E] font-bold px-1.5 py-0.2 rounded-xs tracking-wider">GIS VECTOR</span>
+                  <h4 className="text-[14px] font-bold text-[#1E293B]">原始空间地理矢量</h4>
+                </div>
+                <p className="text-[12px] text-[#475569] leading-relaxed">
+                  支持一键导出含高精检测边缘的 <strong>Shapefile、GeoJSON</strong> 等标准格式，无缝集成至 ArcGIS、QGIS 开展高级拓扑分析。
+                </p>
+              </div>
+
+              <div className="bg-transparent border border-[#E9ECEF] p-2.5 rounded-sm relative group hover:border-[#D97706] transition-all duration-300">
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <span className="text-[8.5px] bg-[#FFFBEB] text-[#D97706] font-bold px-1.5 py-0.2 rounded-xs tracking-wider">ASSET REPORT</span>
+                  <h4 className="text-[14px] font-bold text-[#1E293B]">多维资产统计报表</h4>
+                </div>
+                <p className="text-[12px] text-[#475569] leading-relaxed">
+                  自动生成全域树种分布、冠幅比例等图表，支持一键导出可视化专业分析报表，全方位赋能日常汇报。
+                </p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </PageContent>
-  </Page>
+  </Page >
 );
 
 // === P8: 封底 ===
@@ -576,21 +637,22 @@ const Page8 = () => (
       </div>
 
       {/* Visual Image Block for Middle Empty Space */}
-      <div className="my-6 w-full h-[240px] rounded-sm overflow-hidden border border-[#E9ECEF] relative shadow-sm group">
+      <div className="my-6 w-full h-[350px] rounded-sm overflow-hidden border border-[#E9ECEF] relative shadow-sm group">
         <img
-          src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=1000&auto=format&fit=crop"
-          alt="Mangrove Forest Aerial View"
-          className="w-full h-full object-cover grayscale-[15%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+          src={endPage}
+          className="absolute top-0 left-0 w-full h-[150%] object-cover grayscale-[15%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent"></div>
-        <div className="absolute bottom-3 left-4 text-white text-xs font-medium tracking-widest uppercase">
-          守护海岸线 · AI与生态的和谐共建
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent pointer-events-none"></div>
       </div>
 
-      <div className="mb-8">
-        <h1 className="text-xl font-bold text-[#005C3E] tracking-widest mb-1">广州刃蓝科技有限公司</h1>
-        <p className="text-[11px] text-[#475569] uppercase tracking-widest font-sans">Guangzhou Renlan Technology Co., Ltd.</p>
+      <div className="mb-8 flex items-center gap-3">
+        <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center shrink-0 select-none bg-transparent">
+          <img src={generatedBrandLogo} alt="刃蓝科技商标" className="w-full h-full object-contain scale-[1.1] transform origin-center" />
+        </div>
+        <div className="flex flex-col items-start">
+          <h1 className="text-xl font-bold text-[#005C3E] tracking-widest mb-1">广州刃蓝科技有限公司</h1>
+          <p className="text-[11px] text-[#475569] uppercase tracking-widest font-sans">Guangzhou Renlan Technology Co., Ltd.</p>
+        </div>
       </div>
     </div>
 
@@ -606,11 +668,11 @@ const Page8 = () => (
 
       {/* QR Code Section */}
       <div className="mt-16 flex flex-col items-end">
-        <div className="w-[110px] h-[110px] bg-white border border-[#E9ECEF] rounded-sm flex items-center justify-center p-2 mb-4 shadow-sm">
-          <QrCode size={80} color={COLORS.title} strokeWidth={1.5} />
+        <div className="w-20 h-20 bg-white border border-[#E9ECEF] rounded flex items-center justify-center p-1 shrink-0 shadow-sm">
+          <img src={wechatQRImg} alt="WeChat QR Code" className="w-full h-full object-cover rounded-sm" />
         </div>
         <p className="text-[12.5px] text-[#1E293B] font-bold mb-1">扫码联系技术专家</p>
-        <p className="text-[11px] text-[#475569]">获取系统详细部署方案与行业技术白皮书</p>
+        <p className="text-[11px] text-[#475569]">获取系统详细部署方案</p>
       </div>
     </div>
   </Page>
@@ -620,8 +682,28 @@ const Page8 = () => (
 export default function App() {
   return (
     <div className="min-h-screen bg-gray-200 py-12 px-4 font-sans text-[#475569]">
-      <div className="max-w-[1200px] mx-auto mb-8 text-center">
-        <h1 className="text-3xl font-bold text-gray-800 font-serif">MVAS 产品手册</h1>
+      <div className="max-w-[1190px] w-full mx-auto mb-10 bg-gradient-to-r from-[#004D30] to-[#006E47] rounded-sm py-6 px-10 shadow-sm relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-4 text-white">
+        {/* Subtle grid background inside banner */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none"></div>
+
+        <div className="relative z-10 flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center shrink-0 select-none bg-transparent">
+            <img src={generatedBrandLogo} alt="刃蓝科技商标" className="w-full h-full object-contain scale-[1.1] transform origin-center" />
+          </div>
+          <div className="flex flex-col items-start">
+            <span className="text-[18px] font-bold tracking-wider">刃蓝科技 </span>
+            <span className="text-[9px] text-[#A7F3D0] tracking-widest font-sans uppercase font-semibold">RENLAN TECH.</span>
+          </div>
+        </div>
+
+        <div className="relative z-10 flex flex-col items-center md:items-end text-center md:text-right">
+          <h1 className="text-xl md:text-2xl font-bold tracking-widest font-serif flex items-center gap-2">
+            <span>MVAS 产品手册</span>
+          </h1>
+          <p className="text-[10px] text-white/70 tracking-widest uppercase font-sans font-bold mt-1">
+            MVASS · Product Brochure
+          </p>
+        </div>
       </div>
 
       <div className="flex flex-col items-center">
