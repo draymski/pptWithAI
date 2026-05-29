@@ -8,4 +8,10 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  server: {
+    allowedHosts: [
+      'ppt.renlan.top',
+      '30e515ea.r6.cpolar.cn'
+    ]
+  }
 })
