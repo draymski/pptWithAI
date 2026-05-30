@@ -81,5 +81,6 @@ export default defineConfig([
   - 临时公开本地端口
     - 可用`CF tunnel`
     - 可用`cpolar`, 安装并登录好后, 直接`cpolar http 5173`
-  - 长期托管在vercel
-
+  - 长期托管在vercel  
+    1. push到GitHub
+    2. Vercel新建项目 > import该项目 > 一键部署 > 设置自定义域名,进入`Domains` > 直接搜索准备好的子域名(`xxx.renlan.top`) > add existing > 保持选择`connect to an env` > save > 按Vercel提示把两个`record`写入CF的该域名下的`DNS record`里 > 点开小黄云 > 等一会儿 > bingo!

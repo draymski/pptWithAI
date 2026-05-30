@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   ShieldAlert, Bot, Eye, BarChart,
   Database, Navigation
@@ -26,10 +26,72 @@ interface PageProps {
   className?: string;
 }
 
+// 响应式幻灯片等比例缩放包装器 (确保在手机/平板等小屏幕上能够等比例无损缩放)
+const SlideWrapper = ({ children }: { children: React.ReactNode }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+  const [height, setHeight] = useState<number | string>('auto');
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (!containerRef.current) return;
+      // 获取父容器宽度（即可视宽度减去 padding）
+      const parentWidth = containerRef.current.parentElement?.clientWidth || window.innerWidth;
+      const targetWidth = 1190;
+      
+      if (parentWidth < targetWidth) {
+        // 计算缩放比例，预留一点边缘安全边距
+        const newScale = (parentWidth - 16) / targetWidth;
+        setScale(newScale);
+        // 动态计算缩放后的占位高度，防止缩放后产生大面积空白区域
+        setHeight(841 * newScale);
+      } else {
+        setScale(1);
+        setHeight('auto');
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    // 额外延迟触发一次以确保样式完全加载后计算准确
+    const timer = setTimeout(handleResize, 100);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timer);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      style={{
+        height: height,
+        width: '100%',
+        overflow: 'hidden',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        marginBottom: scale < 1 ? '0.5rem' : '3rem'
+      }}
+    >
+      <div
+        style={{
+          transform: `scale(${scale})`,
+          transformOrigin: 'top center',
+          width: '1190px',
+          flexShrink: 0
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+};
+
 // === 基础布局组件 ===
 const Page = ({ children, className = '' }: PageProps) => (
   <div
-    className={`relative w-full max-w-[1190px] mx-auto aspect-[297/210] shadow-[0_20px_50px_rgba(0,0,0,0.1)] mb-12 overflow-hidden flex flex-col bg-white text-[#475569] ${className}`}
+    className={`relative w-[1190px] h-[841px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col bg-white text-[#475569] ${className}`}
   >
     {children}
   </div>
@@ -706,15 +768,15 @@ export default function App() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center">
-        <Page1 />
-        <Page2 />
-        <Page3 />
-        <Page4 />
-        <Page5 />
-        <Page6 />
-        <Page7 />
-        <Page8 />
+      <div className="flex flex-col items-center w-full">
+        <SlideWrapper><Page1 /></SlideWrapper>
+        <SlideWrapper><Page2 /></SlideWrapper>
+        <SlideWrapper><Page3 /></SlideWrapper>
+        <SlideWrapper><Page4 /></SlideWrapper>
+        <SlideWrapper><Page5 /></SlideWrapper>
+        <SlideWrapper><Page6 /></SlideWrapper>
+        <SlideWrapper><Page7 /></SlideWrapper>
+        <SlideWrapper><Page8 /></SlideWrapper>
       </div>
     </div>
   );
