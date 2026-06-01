@@ -1,1 +1,65 @@
 @import "tailwindcss";
+
+/* ── 打印样式：解决浏览器打印的三个问题 ──
+   1. 隐藏横幅 Banner
+   2. 强制打印背景图/背景色
+   3. 还原幻灯片原始尺寸，消除缩放变形
+*/
+@media print {
+  @page {
+    size: 1190px 841px;
+    margin: 0;
+  }
+
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+
+  /* 隐藏横幅 */
+  [data-banner] {
+    display: none !important;
+  }
+
+  /* 移除 App 外层 padding 和灰色背景 */
+  .min-h-screen {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: white !important;
+    min-height: auto !important;
+  }
+
+  /* 重置 SlideWrapper 外层容器（覆盖 inline style） */
+  [data-slide-wrapper] {
+    height: auto !important;
+    overflow: visible !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* 重置幻灯片内层（覆盖 transform: scale） */
+  [data-slide-page] {
+    transform: none !important;
+    width: 1190px !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none !important;
+  }
+
+  /* 每张幻灯片后分页 */
+  [data-slide-wrapper] {
+    break-after: page;
+    page-break-after: always;
+  }
+
+  /* 最后一张不要多余空白页 */
+  [data-slide-wrapper]:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+}
